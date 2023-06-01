@@ -75,7 +75,7 @@ To provide an overview of the working of the Attendance Monitoring System based 
 #### Attendance Status for Any Class/Section:
 - The admin has the capability to view the attendance status for any class/section.
 - This feature allows the admin to monitor attendance trends and identify any issues or patterns.
-- 
+
 The Attendance Monitoring System enables the admin to manage teachers and students, allows teachers to mark attendance for their classes, and provides a centralized platform for viewing and tracking attendance records. This system streamlines the attendance management process, reduces manual effort, and facilitates efficient monitoring of student attendance.
 
 
