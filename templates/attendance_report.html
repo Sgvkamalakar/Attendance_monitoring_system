@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+            h1 {
+                color: #333;
+                text-align: center;
+                margin-bottom: 80px;
+                margin-top: -45px;
+            }
+        
+            form {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.7);
+                max-width: 600px;
+                margin: 0 auto;
+                margin-bottom: 30px;
+            }
+        
+            label {
+                display: block;
+                margin-bottom: 10px;
+                font-weight: bold;
+            }
+        
+            select,
+            input[type="date"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+        
+            input[type="submit"] {
+                padding: 10px 16px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+            }
+        
+            .details {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.7);
+                max-width: 500px;
+                margin-top: -10px;
+                margin-left: 470px;
+                margin-bottom: 30px;
+            }
+        
+            .details p {
+                margin-bottom: 10px;
+            }
+        
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+        
+            th, td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+        
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        
+            .attendance-status {
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+            .nav {
+                margin-top: -10px;
+                padding: 10px;
+                background-color:#b2d2df;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            .nav a {
+                display: inline-block;
+                padding: 8px 16px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-left: 20px;
+            }
+            .nav a:hover {
+                background-color: black;
+                color: white;
+            }
+            .dash-link {
+                display: inline-block;
+                padding: 8px 16px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-left:40px;
+            }
+            .dash-link:hover {
+                background-color: black;
+                color:white;
+            }
+            
+            .logout-link {
+                display: inline-block;
+                padding: 8px 16px;
+                background-color: #333;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                margin-left:20px;
+            }
+            .logout-link:hover {
+                background-color: black;
+                color:white;
+            }
+            .table-details {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.7);
+                max-width: 800px;
+                margin: 0 auto;
+                margin-bottom: 30px;
+                overflow-x: auto;
+            }
+        
+            .table-details table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+            }
+        
+            .table-details th,
+            .table-details td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+                word-wrap: break-word;
+            }
+        
+            .table-details thead th {
+                background-color: #007bff;
+                color: #fff;
+            }
+        
+            .table-details tbody td {
+                background-color: #fff;
+            }
+        
+            .table-details tbody tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
+</head>
+<body>
+    <div class="nav">
+        <a class="dash-link" href="/admin/admin_dashboard">Dashboard</a>
+        <a class="dash-link" href="/admin/get_attendance_report">Attendance Report</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <h1>Attendance Report</h1>
+    <div class="container">
+    <form method="POST" action="/admin/get_attendance_report">
+        <label for="class_sec">Class Section:</label>
+        <select name="class_sec" id="class_sec">
+            {% for sec in class_secs %}
+                <option value="{{ sec[0] }}">{{ sec[0] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="class_name">Class Name:</label>
+        <select name="class_name" id="class_name">
+        {% for class_name in class_names %}
+                <option value="{{ class_name[0] }}">{{ class_name[0] }}</option>
+            {% endfor %}
+        </select>    
+        <br><br>
+        <label for="attendance_date">Class Date (yyyy-mm-dd);</label>
+        <input type="date" id="class_date" name="class_date"  required pattern="\d{4}-\d{2}-\d{2}" title="Please enter a date in the format yyyy-mm-dd"><br><br>
+        <input type="submit" value="Generate Report">
+    </form>
+    <br><br>
+    <div class="details">
+        <p>Class Section: <strong>{{ class_sec }}</strong></p>
+        <p>Class Name: <strong>{{ class_name }}</strong></p>
+        <p>Class Date: <i><strong>{{ class_date }}</strong></i></p>
+    </div>
+    <div class="table-details">
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Attendance Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>
+                    {% set attendance_found = false %}
+                    {% for att in attendance %}
+                        {% if att[0] == student[0] %}
+                            {{ att[1] }}
+                            {% set attendance_found = true %}
+                        {% endif %}
+                    {% endfor %}
+                </td>                
+            </tr>
+            {% endfor %}
+            
+
+
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>

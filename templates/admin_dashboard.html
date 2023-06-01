@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        .dashboard-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            margin-top: 20%;
+            margin-bottom: 5em;
+            padding: 1em;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+            margin-left:-200px;
+            margin-right:-200px;
+        }
+        
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        
+        select {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+                
+        .nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        .profile-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left:20px;
+        }
+        
+        .profile-link:hover {
+            background-color: black;
+        }
+        
+        .logout-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left:20px;
+        }
+        
+        .logout-link:hover {
+            background-color: black;
+        }
+        .h1, h1 {
+            font-size: 1.8rem;
+            margin-left: 42%;
+            margin-top: -45px;
+            margin-bottom: 20px;
+        }
+        .service-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color:#bfd3f3;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .service-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-box h3 {
+            color: #333333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .service-box p {
+            color: #666666;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #89aae0;
+            border: none;
+            color: #013b79;
+            padding: 10px 20px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            margin-bottom:5px;
+        }
+
+        .btn-primary:hover {
+            background-color:#4659d5;
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a class="profile-link" href="/admin/admin_profile">Profile</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <h1><strong>Admin Dashboard</strong></h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="dashboard-box">
+                    <h2 class="dashboard-title">Services</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="service-box">
+                                <h3>Teacher Registration</h3>
+                                <p>Register teachers here!!</p>
+                                <a href="{{ url_for('register') }}" class="btn btn-primary">Register here</a>
+                            </div>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <div class="service-box">
+                                <h3>Student Registration</h3>
+                                <p>Register and update student details here!!</p>
+                                <a href="{{ url_for('student_register') }}" class="btn btn-primary">Register here</a>
+                                <a href="{{ url_for('update_student') }}" class="btn btn-primary">Student details</a>
+                            </div>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <div class="service-box">
+                                <h3>Attendance Report</h3>
+                                <p>Get daily attendance reports here!!</p>
+                                <a href="{{ url_for('get_attendance_report') }}" class="btn btn-primary">Get reports here</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>

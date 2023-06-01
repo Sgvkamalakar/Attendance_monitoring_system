@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mark Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b3d4e1;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .student-row {
+            margin-bottom: 10px;
+        }
+        .student-name {
+            display: inline-block;
+            width: 200px;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .attendance-checkbox {
+            margin-right: 10px;
+        }
+        .submit-button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+        .nav {
+            margin-top: -67px;
+            margin-bottom: 80px;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        .profile-link,
+        .dash-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .profile-link:hover,
+        .dash-link:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        .logout-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .logout-link:hover {
+            background-color: black;
+            color: white;
+        }
+     
+
+        
+    </style>
+</head>
+<body>
+    <h2>Mark Attendance</h2>
+    <div class="nav">
+        <a class="dash-link" href="/teacher/dashboard">Dashboard</a>
+        <a class="profile-link" href="/teacher/teacher_profile">Profile</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <form method="POST" action="{{ url_for('update_attendance', class_id=class_id) }}">
+        <label for="class_date">Class Date:</label>
+        <input type="text" id="class_date" name="class_date" value="{{ class_date }}" disabled><br>
+        <label for="class_name">Class Name:</label>
+        <input type="text" id="class_name" name="class_name" value="{{ class_name }}" disabled><br>
+        <label for="class_sec">Class Section:</label>
+        <input type="text" id="class_sec" name="class_sec" value="{{ class_sec }}" disabled><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Attendance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <td>{{ student[0] }}</td>
+                    <td>{{ student[1] }}</td>
+                    <td>
+                        <input type="checkbox" name="attendance" value="{{ student[0] }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <input type="submit" value="Submit" class="submit-button">
+    </form>    
+
+</body>
+</html>

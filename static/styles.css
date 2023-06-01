@@ -1,0 +1,132 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .form-group button:hover {
+    background-color: #45a049;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .radio-group {
+    margin-top: 10px;
+  }
+  
+  .radio-group label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .dashboard {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .dashboard li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .dashboard li:last-child {
+    border-bottom: none;
+  }
+  
+  .dashboard li .class-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard li .class-info .class-name {
+    margin-left: 10px;
+  }
+  
+  .dashboard li .attendance-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .dashboard li .attendance-info .attendance-label {
+    margin-right: 10px;
+  }
+  
+  .logout {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .logout a {
+    color: #4CAF50;
+    text-decoration: none;
+  }
+  
+  .logout a:hover {
+    text-decoration: underline;
+  }
+  

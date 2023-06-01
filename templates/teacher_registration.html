@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        .msg {
+            color: #023e10;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #86e386;
+            margin-top: 10px;
+            margin-left: 40%;
+            margin-right: 33%;
+        }
+        
+        .error {
+            color: #ff0000;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #e79898;
+            margin-top: 10px;
+            margin-left: 38%;
+            margin-right: 30%;
+        }
+        
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        form {
+            max-width: 350px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #3f86c6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #164d8d;
+        }
+
+        .msg,
+        .error {
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        .h1, h1 {
+            font-size: 1.8rem;
+            margin-top: -45px;
+            margin-bottom: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a class="dash-link" href="/admin/admin_dashboard">Dashboard</a>
+        <a class="profile-link" href="/admin/admin_profile">Profile</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <h1><strong>Teacher Registration</strong></h1>
+    <div class="container">
+        <form method="POST" action="{{ url_for('register') }}">
+            <input class="form-control" type="text" name="name" placeholder="Name" required><br>
+            <input class="form-control" type="text" name="username" placeholder="Username" required><br>
+            <input class="form-control" type="password" name="password" placeholder="Password" required><br>
+            <input class="form-control" type="email" name="email" placeholder="Email" required><br>
+            <input class="form-control" type="text" name="phone" placeholder="Phone Number" required><br>
+            <input class="btn btn-primary" type="submit" value="Register"><br>
+        </form>
+        {% if message %}
+            <p class="msg">{{ message }}</p>
+        {% endif %}
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

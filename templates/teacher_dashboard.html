@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        
+        .dashboard-box {
+            background-color: rgba(0, 0, 0, 0.6);
+            margin-top: 25%;
+            margin-bottom: 5em;
+            padding: 1em;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+        }
+        
+        .dashboard-title {
+            text-align: center;
+            margin-bottom: 2em;
+        }
+        
+        select {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        
+        .class-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .class-list-item {
+            margin-bottom: 10px;
+        }
+        
+        .class-link {
+            display: inline-block;
+            padding: 8px;
+            background-color: #eee;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .class-link:hover {
+            background-color: #ddd;
+        }
+        
+        .add-class-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .add-class-link:hover {
+            background-color: #0056b3;
+        }
+        
+        .nav {
+            margin: 0;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        
+        .profile-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left:20px;
+        }
+        
+        .profile-link:hover {
+            background-color: black;
+        }
+        
+        .logout-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left:20px;
+        }
+        
+        .logout-link:hover {
+            background-color: black;
+        }
+        .h1, h1 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-left: 40%;
+            margin-top: -45px;
+            margin-bottom: 20px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a class="profile-link" href="/teacher/teacher_profile">Profile</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <h1><strong>Teacher Dashboard</strong></h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="dashboard-box">
+                    <h2 class="dashboard-title">Mark Attendance</h2>
+                    <select id="class-section-select">
+                        <option value="" disabled selected>Select Class Section</option>
+                        {% set addedSections = [] %}
+                        {% for class in classes %}
+                            {% if class[2] == session['username'] and class[3] not in addedSections %}
+                                <option value="{{ class[3] }}">{{ class[3] }}</option>
+                                {% set _ = addedSections.append(class[3]) %}
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    
+                    <ul id="class-links" class="class-list" style="display: none;"></ul>
+                    
+                    <br>
+                    <div class="text-center">
+                        <a class="add-class-link" href="/teacher/add_class">Add Class</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const classSectionSelect = document.getElementById('class-section-select');
+        const classLinks = document.getElementById('class-links');
+    
+        classSectionSelect.addEventListener('change', function() {
+            const selectedSection = this.value;
+            showClassLinks(selectedSection);
+        });
+    
+        function showClassLinks(selectedSection) {
+            if (selectedSection) {
+                classLinks.style.display = 'block';
+                classLinks.innerHTML = '';
+    
+                const uniqueSections = new Set();
+                const classes = JSON.parse('{{ classes | tojson | safe }}');
+                for (let i = 0; i < classes.length; i++) {
+                    if (classes[i][2] === '{{ session['username'] }}') {
+                        uniqueSections.add(classes[i][3]);
+                    }
+                }
+    
+                for (const section of uniqueSections) {
+                    const option = document.createElement('option');
+                    option.value = section;
+                    option.innerText = section;
+                    
+                }
+    
+                for (let i = 0; i < classes.length; i++) {
+                    if (classes[i][2] === '{{ session['username'] }}' && classes[i][3] === selectedSection) {
+                        const classLink = document.createElement('li');
+                        classLink.className = 'class-list-item';
+                        const link = document.createElement('a');
+                        link.className = 'class-link';
+                        link.href = '/teacher/mark_attendance/' + classes[i][0];
+                        link.innerText = classes[i][1];
+                        classLink.appendChild(link);
+                        classLinks.appendChild(classLink);
+                    }
+                }
+            } else {
+                classLinks.style.display = 'none';
+                classLinks.innerHTML = '';
+            }
+        }
+    </script>
+</body>
+</html>

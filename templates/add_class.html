@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Class</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
+            background-size: cover;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-top: -35px;
+            margin-bottom:10%;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        input[type="text"],
+        select,
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .nav {
+            margin-top: -8px;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a class="dash-link" href="/teacher/dashboard">Dashboard</a>
+        <a class="profile-link" href="/teacher/teacher_profile">Profile</a>
+        <a class="logout-link" href="/logout">Logout</a>
+    </div>
+    <h2><strong>Add Class</strong></h2>
+    <form method="POST" action="{{ url_for('add_class') }}">
+        <label for="class_section">Class Section</label>
+        <select id="class_section" name="class_section" required>
+            <option value="" disabled selected>Select Class Section</option>
+            {% for section in class_sections %}
+            <option value="{{ section[0] }}">{{ section[0] }}</option>
+            {% endfor %}
+        </select>
+        <label for="class_name">Subject Name</label>
+        <input type="text" id="class_name" name="class_name" placeholder="Subject" required>
+        <label for="attendance_date">Attendance Date (yyyy-mm-dd)</label>
+        <input type="date" id="attendance_date" name="attendance_date"  required pattern="\d{4}-\d{2}-\d{2}" title="Please enter a date in the format yyyy-mm-dd">
+        <br>
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>

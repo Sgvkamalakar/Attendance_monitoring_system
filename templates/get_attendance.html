@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b3d4e1;
+            padding: 20px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10%;
+            margin-top: -40px;
+        }
+        
+        .container {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .nav {
+            margin: -30px;
+            padding: 10px;
+            background-color: #0099CC;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-left: 20px;
+        }
+        .nav a:hover {
+            background-color: black;
+            color: white;
+        }
+        
+     
+        .details {
+            margin-top: 30px;
+        }
+
+        .details h3 {
+            margin-top: 0;
+        }
+
+        .details ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .details li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+        <div class="nav">
+            <a class="dash-link" href="/teacher/dashboard">Dashboard</a>
+            <a class="profile-link" href="/teacher/teacher_profile">Profile</a>
+            <a class="logout-link" href="/logout">Logout</a>
+        </div>
+        <h2>Attendance Report</h2>
+        <div class="container">
+        <div class="details">
+            <h3>Class Details:</h3>
+            <ul>
+                <li><strong>Class Name:</strong> {{ class_name[0] }}</li>
+                <li><strong>Class Section:</strong> {{ class_sec[0] }}</li>
+                <li><strong>Class Date:</strong> {{ class_date[0] }}</li>
+            </ul>
+        </div>
+        <!-- Details of the students in attendance -->
+<div class="details">
+    <h3>Details of the students in attendance</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in present_students %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Details of the absent students -->
+<div class="details">
+    <h3>Details of the absent students</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in absent_students %}
+            <tr>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</body>
+</html>
