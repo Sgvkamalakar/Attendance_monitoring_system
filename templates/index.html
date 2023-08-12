@@ -9,76 +9,23 @@
     body {
       background: url("{{ url_for('static', filename='bg.png') }}") no-repeat center center fixed;
       background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
     }
     .container {
       background: rgba(0, 0, 0, 0.6);
-      margin-top: 3em;
-      margin-bottom: 5em;
-      padding-top: 1em;
-      padding-bottom: 3em;
-      color: #fff;
-      border-radius: 10px;
-      box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
-    }
-
-    .section-title {
-      margin-bottom: 2em;
-      text-align: center;
-    }
-
-    h4 {
-      text-align: center;
-      margin-top: 1.5em;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a:hover {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .alert {
-      margin-bottom: 1em;
-    }
-    .features-section {
-      margin-top: 3em;
-      margin-bottom: 5em;
+      margin: 3em auto 5em;
       padding: 1em;
+      color: #fff;
       border-radius: 10px;
-      box-shadow: 2px 2px 15px 0px rgba(0, 3, 0, 0.7);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    .section-title {
+      margin: 0;
+      padding: 1em 0;
       text-align: center;
-      color: #fff;
     }
-
-    .features-title {
-      margin-bottom: 2em;
-      text-align: center;
-      color: #fff;
-    }
-
-    .feature {
-      margin-bottom: 2em;
-    }
-
-    .feature-icon {
-      font-size: 3em;
-      margin-bottom: 0.5em;
-      color: #fff;
-    }
-
-    .feature-title {
-      font-size: 1.5em;
-      margin-bottom: 0.5em;
-      color: #fff;
-    }
-
-    .feature-description {
-      color: #fff;
-    }
-    
     .login-btn {
       background-color: #007bff;
       color: #fff;
@@ -88,38 +35,47 @@
       font-size: 18px;
       cursor: pointer;
       transition: background-color 0.3s;
+      text-decoration: none;
+      display: inline-block;
     }
-
     .login-btn:hover {
       background-color: #0069d9;
     }
-
+    .features-section {
+      margin: 3em auto 5em;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      color: #fff;
+    }
+    .features-title {
+      margin: 0 0 2em;
+      color: #fff;
+    }
     .features-list {
       list-style-type: none;
       padding: 0;
-      margin-top: 1em;
+      margin: 1em 0;
     }
-
     .features-list li {
       margin-bottom: 1em;
+      display: flex;
+      align-items: center;
     }
-
     .features-list li:before {
       content: "\2022";
       color: #007bff;
       font-weight: bold;
       display: inline-block;
       width: 1em;
-      margin-left: -1em;
+      margin-right: 0.5em;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="col-sm-12">
-      <h1 class="text-center section-title">Attendance Monitoring System</h1>
-    </div>
-
+    <h1 class="section-title">Attendance Monitoring System</h1>
     <div class="row justify-content-center">
       <div class="col-md-4">
         <div class="text-center">
@@ -127,7 +83,6 @@
         </div>
       </div>
     </div>
-
     <div class="features-section">
       <h2 class="features-title">Features of the Attendance Monitoring System:</h2>
       <ul class="features-list">
@@ -139,9 +94,5 @@
       </ul>
     </div>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
