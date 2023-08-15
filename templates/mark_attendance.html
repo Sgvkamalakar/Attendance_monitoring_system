@@ -137,6 +137,7 @@
                 </tr>
             </thead>
             <tbody>
+                
                 {% for student in students %}
                 <tr>
                     <td>{{ student[0] }}</td>
@@ -146,11 +147,25 @@
                     </td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td colspan="3">
+                        <label for="select-all-checkbox">Select All:</label>
+                        <input type="checkbox" id="select-all-checkbox">
+                    </td>
+                </tr>
             </tbody>
         </table>
         <br>
         <input type="submit" value="Submit" class="submit-button">
+        
     </form>    
-
+    <script>
+        document.getElementById('select-all-checkbox').addEventListener('change', function () {
+            var checkboxes = document.querySelectorAll('input[name="attendance"]');
+            for (var checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        });
+    </script>
 </body>
 </html>
